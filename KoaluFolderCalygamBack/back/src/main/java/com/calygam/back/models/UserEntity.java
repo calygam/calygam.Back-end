@@ -5,6 +5,8 @@ import com.calygam.back.enums.UserRoleEnum;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -34,23 +36,32 @@ public class UserEntity {
 	@Column(name="user_password")
 	private String userPassword;
 	
+	
+	
 	@Column(name="user_telefone")
 	private String userTelefone;
 	
 	@Column(name="user_cpf")
 	private Integer userCpf;
 	
+	@Column(name="user_money")
+	private Integer userMoney;
 	@Column(name="user_xp")
 	private Integer xp;
 	
+	@Enumerated(EnumType.STRING)
 	@Column(name="user_rank")
 	private UserRankEnum rank;
 	
+	@Enumerated(EnumType.STRING)
 	@Column(name="user_role")
 	private UserRoleEnum role;
+	
 
-	public UserEntity(Integer userId, String userGoogleId, String userName, String userEmail, String userPassword,
-			String userTelefone, Integer userCpf, Integer xp, UserRankEnum rank, UserRoleEnum role) {
+
+	public UserEntity(Integer userId, String userGoogleId, String userName, @Email String userEmail,
+			String userPassword, String userTelefone, Integer userCpf, Integer userMoney, Integer xp, UserRankEnum rank,
+			UserRoleEnum role) {
 		super();
 		this.userId = userId;
 		this.userGoogleId = userGoogleId;
@@ -59,6 +70,7 @@ public class UserEntity {
 		this.userPassword = userPassword;
 		this.userTelefone = userTelefone;
 		this.userCpf = userCpf;
+		this.userMoney = userMoney;
 		this.xp = xp;
 		this.rank = rank;
 		this.role = role;
@@ -140,6 +152,14 @@ public class UserEntity {
 
 	public UserRoleEnum getRole() {
 		return role;
+	}
+
+	public Integer getUserMoney() {
+		return userMoney;
+	}
+
+	public void setUserMoney(Integer userMoney) {
+		this.userMoney = userMoney;
 	}
 
 	public void setRole(UserRoleEnum role) {
