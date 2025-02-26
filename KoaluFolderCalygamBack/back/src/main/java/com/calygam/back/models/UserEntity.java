@@ -1,6 +1,12 @@
 package com.calygam.back.models;
 
 import java.math.BigInteger;
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.calygam.back.enums.UserRankEnum;
 import com.calygam.back.enums.UserRoleEnum;
@@ -17,7 +23,7 @@ import jakarta.validation.constraints.Email;
 
 @Entity(name = "tb_users")
 @Table(name = "tb_users")
-public class UserEntity {
+public class UserEntity implements UserDetails {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
@@ -71,6 +77,10 @@ public class UserEntity {
 
 
 
+
+	public UserEntity() {
+		super();
+	}
 
 	public UserEntity(Integer userId, String userGoogleId, String userName, @Email String userEmail,
 			String userPassword, String userImageParfil, String userTelefone, String userCpf, BigInteger userMoney,
@@ -192,6 +202,61 @@ public class UserEntity {
 
 	public void setUserImageParfil(String userImageParfil) {
 		this.userImageParfil = userImageParfil;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		if(this.userRole == UserRoleEnum.ADMIN) {
+			return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"),
+					new SimpleGrantedAuthority("ROLE_COORDENADOR"),
+					new SimpleGrantedAuthority("ROLE_INSTRUTOR"),
+					new SimpleGrantedAuthority("ROLE_ALUNO"));
+		}else if(this.userRole == UserRoleEnum.COORDENADOR) {
+			return List.of(new SimpleGrantedAuthority("ROLE_COORDENADOR"));
+		}else if(this.userRole == UserRoleEnum.ALUNO) {
+			return List.of(new SimpleGrantedAuthority("ROLE_ALUNO"));
+		}
+		else if(this.userRole == UserRoleEnum.INSTRUTOR) {
+			return List.of(new SimpleGrantedAuthority("ROLE_INSTRUTOR"));
+		}
+		return null;
+	}
+
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return userPassword;
+	}
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return userEmail;
+	}
+	
+	
+	@Override
+	public boolean isAccountNonExpired() {
+	
+	    return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+	  
+	    return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+	 
+	    return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+	   
+	    return true;
 	}
 
 	

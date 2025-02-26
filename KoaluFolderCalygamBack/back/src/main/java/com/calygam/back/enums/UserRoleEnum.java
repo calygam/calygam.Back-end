@@ -6,6 +6,7 @@ package com.calygam.back.enums;
 
 public enum UserRoleEnum {                      
 	ADMIN("admin"),
+	COORDENADOR("coordenador"),
 	INSTRUTOR("instrutor"),
 	ALUNO("aluno");
 	
