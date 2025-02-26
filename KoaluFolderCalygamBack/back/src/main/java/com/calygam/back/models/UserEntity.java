@@ -1,5 +1,7 @@
 package com.calygam.back.models;
 
+import java.math.BigInteger;
+
 import com.calygam.back.enums.UserRankEnum;
 import com.calygam.back.enums.UserRoleEnum;
 
@@ -36,44 +38,56 @@ public class UserEntity {
 	@Column(name="user_password")
 	private String userPassword;
 	
+	@Column(name="user_image_perfil")
+	private String userImageParfil;
+	
 	
 	
 	@Column(name="user_telefone")
 	private String userTelefone;
 	
 	@Column(name="user_cpf")
-	private Integer userCpf;
+	private String userCpf;
 	
 	@Column(name="user_money")
-	private Integer userMoney;
+	private BigInteger userMoney;
 	@Column(name="user_xp")
 	private Integer xp;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name="user_rank")
-	private UserRankEnum rank;
+	private UserRankEnum userRank;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name="user_role")
-	private UserRoleEnum role;
+	private UserRoleEnum userRole;
 	
 
 
+
+
+
+
+
+
+
+
 	public UserEntity(Integer userId, String userGoogleId, String userName, @Email String userEmail,
-			String userPassword, String userTelefone, Integer userCpf, Integer userMoney, Integer xp, UserRankEnum rank,
-			UserRoleEnum role) {
+			String userPassword, String userImageParfil, String userTelefone, String userCpf, BigInteger userMoney,
+			Integer xp, UserRankEnum userRank, UserRoleEnum userRole) {
 		super();
 		this.userId = userId;
 		this.userGoogleId = userGoogleId;
 		this.userName = userName;
 		this.userEmail = userEmail;
 		this.userPassword = userPassword;
+		this.userImageParfil = userImageParfil;
 		this.userTelefone = userTelefone;
 		this.userCpf = userCpf;
 		this.userMoney = userMoney;
 		this.xp = xp;
-		this.rank = rank;
-		this.role = role;
+		this.userRank = userRank;
+		this.userRole = userRole;
 	}
 
 	public Integer getUserId() {
@@ -126,11 +140,13 @@ public class UserEntity {
 		this.userTelefone = userTelefone;
 	}
 
-	public Integer getUserCpf() {
+
+
+	public String getUserCpf() {
 		return userCpf;
 	}
 
-	public void setUserCpf(Integer userCpf) {
+	public void setUserCpf(String userCpf) {
 		this.userCpf = userCpf;
 	}
 
@@ -142,30 +158,44 @@ public class UserEntity {
 		this.xp = xp;
 	}
 
-	public UserRankEnum getRank() {
-		return rank;
-	}
 
-	public void setRank(UserRankEnum rank) {
-		this.rank = rank;
-	}
 
-	public UserRoleEnum getRole() {
-		return role;
-	}
 
-	public Integer getUserMoney() {
+
+	public BigInteger getUserMoney() {
 		return userMoney;
 	}
 
-	public void setUserMoney(Integer userMoney) {
+	public void setUserMoney(BigInteger userMoney) {
 		this.userMoney = userMoney;
 	}
 
-	public void setRole(UserRoleEnum role) {
-		this.role = role;
+	public UserRankEnum getUserRank() {
+		return userRank;
 	}
+
+	public void setUserRank(UserRankEnum userRank) {
+		this.userRank = userRank;
+	}
+
+	public UserRoleEnum getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(UserRoleEnum userRole) {
+		this.userRole = userRole;
+	}
+
+	public String getUserImageParfil() {
+		return userImageParfil;
+	}
+
+	public void setUserImageParfil(String userImageParfil) {
+		this.userImageParfil = userImageParfil;
+	}
+
 	
+
 	
 	
 	
